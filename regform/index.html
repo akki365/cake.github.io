@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+
+
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+    <script>
+        $(document).ready(function() {
+            typeWriter();
+
+        });
+
+        var i = 0;
+        var txt = 'Unique Creations For Unique Occasions.';
+        var speed = 180;
+
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("typed").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+
+
+            }
+
+
+
+
+
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#submit").click(function() {
+                var cname = $("#cname").val();
+                var phone = $("#phone").val();
+                var address = $("#address").val();
+                var Weight = $("#Weight").val();
+                var food = $("#food").val();
+
+                $.ajax({
+                    url: 'send.php',
+                    type: 'POST',
+                    data: {
+                        'cname': cname,
+                        'phone': phone,
+                        'address': address,
+                        'weight': Weight,
+                        'food': food
+                    },
+
+                    success: function(response) {
+                        swal({
+                            title: "Congratulation!",
+                            text: "Your  Order Place Successfully...",
+                            icon: "success"
+                        }).then(function() {
+                            // Redirect the user
+                            window.location.href = "http://localhost/cake/";
+                            console.log('The Ok Button was clicked.');
+                        });
+                    }
+                })
+
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="main">
+
+        <div class="container">
+            <div class="booking-content">
+                <div class="booking-image">
+                    <img class="booking-img" src="images/form-img1.jpg" alt="Booking Image">
+                </div>
+                <div class="booking-form">
+                    <form id="booking-form">
+
+                        <span id="typed"></span>
+                        <div class="form-group form-input">
+                            <input type="text" name="name" id="cname" value="" required/>
+                            <label for="name" class="form-label">Enter Name</label>
+                        </div>
+                        <div class="form-group form-input">
+                            <input type="number" name="phone" id="phone" value="" required />
+                            <label for="phone" class="form-label">Enter Mobile Number</label>
+                        </div>
+
+                        <div class="form-group form-input">
+                            <input type="text" name="address" id="address" value="" required />
+                            <label for="address" class="form-label">Enter Residencial Address</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="select-list">
+                                <select name="time" id="Weight" required>
+                                    <option value="">Weight</option>
+                                    <option value="1 Kg">1 Kg</option>
+                                    <option value="2 Kg">2 Kg</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="select-list">
+                                <select name="food" id="food" required>
+                                    <option value="">Select Cake Flavor</option>
+                                    <option value="Choclate">Choclate</option>
+                                    <option value="strawberry">Strawberry</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-radio">
+                            <label class="label-radio "> This Service Only Available In Nashik</label>
+                            <!--<div class="radio-item-list">
+                                <span class="radio-item">
+                                    <input type="radio" name="number_people" value="2" id="number_people_2" />
+                                    <label for="number_people_2">2</label>
+                                </span>
+                                <span class="radio-item active">
+                                    <input type="radio" name="number_people" value="4" id="number_people_4" checked="checked" />
+                                    <label for="number_people_4">4</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" name="number_people" value="6" id="number_people_6" />
+                                    <label for="number_people_6">6</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" name="number_people" value="8" id="number_people_8" />
+                                    <label for="number_people_8">8</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" name="number_people" value="10" id="number_people_10" />
+                                    <label for="number_people_10">10</label>
+                                </span>
+                            </div>-->
+                        </div>
+
+                        <div class="form-submit">
+                            <input type="button" value="Order Now" class="submit" id="submit" name="submit" />
+
+                            <label style="font-size:17px;font-weight: bold;float: left;font-family: Flamenco;margin-top: 13px;">
+                                Place Your Order Right Now
+                                
+                             </label>
+
+                            <img src="images/emoji.png" style="height:30px;width: 30px;margin-left:10px;margin-top: 12px;" class="img-responsive">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+
+</html>
